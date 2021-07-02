@@ -3,12 +3,7 @@ package com.SimpleBank.BDiA_final_config.DAOs;
 import com.SimpleBank.BDiA_final_config.Models.User;
 import com.SimpleBank.BDiA_final_config.queries.Queries;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-
+import java.sql.*;
 
 
 public class UserDAO extends BaseDAO {
@@ -39,6 +34,23 @@ public class UserDAO extends BaseDAO {
                 statement.execute();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
+            }
+        }
+
+        public void updateAmmount(String email) throws SQLException {
+            getUserInfo(email);
+        }
+
+        public void getUserInfo(String email) throws SQLException {
+            User user;
+            try (Connection connection = getConnection()) {
+                PreparedStatement userSelect = connection.prepareStatement(Queries.selectUser);
+                userSelect.setString(1, email);
+                userSelect.execute();
+                ResultSet set = userSelect.getResultSet();
+                while (set.next()){
+                    System.out.println(set);
+                }
             }
         }
     }

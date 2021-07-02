@@ -6,11 +6,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE HTML>
 <html>
 <head>
-    <title>Hello</title>
+    <meta charset="UTF-8">
+    <title> Hello ${user}</title>
 </head>
 <body>
-    <h1>Hello User !</h1>
+        <div>
+            <h1>hellow ${user}</h1>
+            <form action="${pageContext.request.contextPath}/test" action="#">
+                <input name="ammount" type="text" placeholder="Kwota" required autofocus>
+                <button type="submit">Przelej</button>
+            </form>
+
+
+        </div>
 </body>
 </html>

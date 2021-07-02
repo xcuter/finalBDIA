@@ -7,4 +7,5 @@ public class Queries {
     public static final String createAcoount = "INSERT INTO accounts (account_id, ammount, creation_date) VALUES (?,?,?) ";
     public static final String logOperation = "INSERT INTO operations (uuid, operation_name,time_stamp,toAccount,ammount) VALUES (?,?,?,?,?)";
     public static final String addAmmount = "UPDATE accounts (ammount) WHERE account_id = (?)";
+    public static final String selectUser = "SELECT (account_id,firstname,lastname) FROM users WHERE email=\"(?)\"";
 }
