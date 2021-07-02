@@ -16,7 +16,7 @@ public class AccountDAO extends BaseDAO{
             createAccountID.setDouble(2, account.getAmmount());
             createAccountID.setDate(3, account.getCreationTime());
             connection.setAutoCommit(false);
-            connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE); //set Transaction isolation level to Serializable
+            connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
             int maxCount = 0;
               while (isNull(account) || (maxCount == 10)){
                     account.setNewAccountId();

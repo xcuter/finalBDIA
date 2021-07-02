@@ -12,7 +12,7 @@ public class Operation {
     private String toAccount;
     private Double ammount;
 
-    Operation(){
+    public Operation(){
         this.uuid = UUID.randomUUID();
         this.operationName = "null";
         this.timeStamp.getTime();
