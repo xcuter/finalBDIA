@@ -13,7 +13,7 @@ public class Account {
         this.accountID = ThreadLocalRandom.current().nextLong(10000,1000000);
         this.ammount = 0.0d;
         creationTime = new Date(Calendar.getInstance().getTime().getTime());
-    } //todo account constructor and model definition
+    }
 
 
     public Long getAccountID() {
@@ -26,6 +26,10 @@ public class Account {
 
     public Date getCreationTime(){
         return this.creationTime;
+    }
+
+    public void setNewAccountId(){
+        this.accountID = ThreadLocalRandom.current().nextLong(1000,1000000);
     }
 
     public void setAmmount(Double ammount){
