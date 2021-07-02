@@ -7,24 +7,6 @@ import java.sql.*;
 
 
 public class AccountDAO extends BaseDAO{
-    /*public Long createAccount() throws SQLException {
-        Account account = new Account();
-        try(Connection connection = getConnection()){
-            PreparedStatement statement = connection.prepareStatement(Queries.selectAccountID);
-            statement.setLong(1,account.getAccountID());
-            statement.execute();
-            ResultSet set = statement.getResultSet();
-            statement = connection.prepareStatement(Queries.createAcoount);
-            if(!set.wasNull()){
-                statement.setLong(1 , account.getAccountID());
-                statement.setDouble(2 , account.getAmmount());
-                statement.setDate(3, account.getCreationTime());
-                statement.execute();
-                return account.getAccountID();
-            }
-        }
-        return null;
-    }*/
 
     public Account createAccount() throws SQLException {
         Account account = new Account();
@@ -34,7 +16,7 @@ public class AccountDAO extends BaseDAO{
             createAccountID.setDouble(2, account.getAmmount());
             createAccountID.setDate(3, account.getCreationTime());
             connection.setAutoCommit(false);
-            connection.setTransactionIsolation(8); //set Transaction isolation level to Serializable
+            connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE); //set Transaction isolation level to Serializable
             int maxCount = 0;
               while (isNull(account) || (maxCount == 10)){
                     account.setNewAccountId();
@@ -43,7 +25,7 @@ public class AccountDAO extends BaseDAO{
               createAccountID.execute();
               connection.commit();
               connection.setAutoCommit(true);
-              connection.setTransactionIsolation(0);
+              connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
         }
         return account;
     }

@@ -31,13 +31,11 @@ public class UserDAO extends BaseDAO {
         private void saveUser(User user) {
             try(Connection connection = getConnection();
                 PreparedStatement statement =connection.prepareStatement(Queries.saveUserQuery, Statement.RETURN_GENERATED_KEYS)) {
-                System.out.println(Queries.saveUserQuery);
                 statement.setString(1, user.getEmail());
                 statement.setString(2, user.getPassword());
                 statement.setLong(3, user.getAccountID());
                 statement.setString(4, user.getFirstName());
                 statement.setString(5, user.getLastName());
-                System.out.println(statement);
                 statement.execute();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
