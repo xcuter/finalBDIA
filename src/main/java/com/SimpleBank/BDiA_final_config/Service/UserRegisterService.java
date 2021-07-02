@@ -1,21 +1,24 @@
 package com.SimpleBank.BDiA_final_config.Service;
 
 
+import com.SimpleBank.BDiA_final_config.DAOs.AccountDAO;
 import com.SimpleBank.BDiA_final_config.DAOs.UserDAO;
+import com.SimpleBank.BDiA_final_config.Models.Account;
 import com.SimpleBank.BDiA_final_config.Models.User;
 import com.SimpleBank.BDiA_final_config.Models.UserRegistration;
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class UserRegisterService {
     private UserDAO usDAO = new UserDAO();
+    private AccountDAO accountDAO = new AccountDAO();
 
     public void register(UserRegistration userRegistration) {
         User userToRegister = UserMapper.map(userRegistration);
         try {
-           hashPasswordWithSha256(userToRegister);
-           usDAO.save(userToRegister);
-
-        } catch (Exception e) {
+                userToRegister.setAccountID(accountDAO.createAccount());
+                hashPasswordWithSha256(userToRegister);
+                usDAO.save(userToRegister);
+            } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -36,4 +39,6 @@ public class UserRegisterService {
             );
         }
     }
+
+
 }

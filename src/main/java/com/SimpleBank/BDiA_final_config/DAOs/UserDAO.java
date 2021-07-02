@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Random;
+
 
 
 
@@ -16,7 +16,6 @@ public class UserDAO extends BaseDAO {
         public void save(User user){
             saveUser(user);
             saveUserRole(user);
-            //  createAccount();
         }
 
         private void saveUserRole(User user){
@@ -35,8 +34,7 @@ public class UserDAO extends BaseDAO {
                 System.out.println(Queries.saveUserQuery);
                 statement.setString(1, user.getEmail());
                 statement.setString(2, user.getPassword());
-                Random rnd = new Random(); //todo account generation and assignment
-                statement.setLong(3, rnd.nextLong());
+                statement.setLong(3, user.getAccountID());
                 statement.setString(4, user.getFirstName());
                 statement.setString(5, user.getLastName());
                 System.out.println(statement);
