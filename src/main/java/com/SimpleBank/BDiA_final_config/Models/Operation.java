@@ -31,4 +31,9 @@ public class Operation {
     public String getToAccount(){
         return this.toAccount;
     }
+    public Date getTimeStamp(){return this.timeStamp;}
+    public Double getAmmount(){
+        return this.getAmmount();
+    }
+
 }
