@@ -5,17 +5,19 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class Operation { // todo constructor and model definition
+public class Operation {
     private UUID uuid;
     private String operationName;
     private Date timeStamp;
     private String toAccount;
+    private Double ammount;
 
     Operation(){
         this.uuid = UUID.randomUUID();
         this.operationName = "null";
         this.timeStamp.getTime();
         this.toAccount = "null";
+
     }
 
     public UUID getUuid() {
