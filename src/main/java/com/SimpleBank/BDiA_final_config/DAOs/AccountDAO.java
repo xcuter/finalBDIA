@@ -34,6 +34,7 @@ public class AccountDAO extends BaseDAO{
             createAccountID.setDouble(2, account.getAmmount());
             createAccountID.setDate(3, account.getCreationTime());
             connection.setAutoCommit(false);
+            connection.setTransactionIsolation(8); //set Transaction isolation level to Serializable
             int maxCount = 0;
               while (isNull(account) || (maxCount == 10)){
                     account.setNewAccountId();
@@ -42,6 +43,7 @@ public class AccountDAO extends BaseDAO{
               createAccountID.execute();
               connection.commit();
               connection.setAutoCommit(true);
+              connection.setTransactionIsolation(0);
         }
         return account;
     }
