@@ -26,9 +26,7 @@ public class AccountDAO extends BaseDAO{
         return null;
     }*/
 
-    //todo with transaction
-
-    public Long createAccount() throws SQLException {
+    public Account createAccount() throws SQLException {
         Account account = new Account();
         try(Connection connection = getConnection()){
             PreparedStatement createAccountID = connection.prepareStatement(Queries.createAcoount);
@@ -36,14 +34,16 @@ public class AccountDAO extends BaseDAO{
             createAccountID.setDouble(2, account.getAmmount());
             createAccountID.setDate(3, account.getCreationTime());
             connection.setAutoCommit(false);
-              while (!isNull(account)){
+            int maxCount = 0;
+              while (isNull(account) || (maxCount == 10)){
                     account.setNewAccountId();
+                    maxCount++;
               }
               createAccountID.execute();
               connection.commit();
               connection.setAutoCommit(true);
         }
-        return account.getAccountID();
+        return account;
     }
 
     private boolean isNull(Account account) throws SQLException {
