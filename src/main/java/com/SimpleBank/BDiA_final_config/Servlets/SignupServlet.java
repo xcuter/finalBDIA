@@ -12,12 +12,13 @@ import java.io.IOException;
 
 
     @WebServlet("/signup")
-    public class SignupController extends HttpServlet {
+    public class SignupServlet extends HttpServlet {
         private final UserRegisterService us = new UserRegisterService();
 
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-            request.getRequestDispatcher("signup.jsp").forward(request,response);
+            request.getRequestDispatcher("/WEB-INF/views/signup.jsp").forward(request,response);
+            System.out.println(request.getContextPath());
         }
 
         @Override
