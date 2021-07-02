@@ -35,7 +35,7 @@ public class UserDAO extends BaseDAO {
                 System.out.println(Queries.saveUserQuery);
                 statement.setString(1, user.getEmail());
                 statement.setString(2, user.getPassword());
-                Random rnd = new Random();
+                Random rnd = new Random(); //todo account generation and assignment
                 statement.setLong(3, rnd.nextLong());
                 statement.setString(4, user.getFirstName());
                 statement.setString(5, user.getLastName());
