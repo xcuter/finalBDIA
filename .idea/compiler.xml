@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="BDiA_final_config" target="1.8" />
+      <module name="BDiA_final_config" target="9" />
     </bytecodeTargetLevel>
   </component>
 </project>

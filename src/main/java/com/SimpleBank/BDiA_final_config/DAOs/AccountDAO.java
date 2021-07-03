@@ -1,6 +1,8 @@
 package com.SimpleBank.BDiA_final_config.DAOs;
 
 import com.SimpleBank.BDiA_final_config.Models.Account;
+import com.SimpleBank.BDiA_final_config.Models.Operation;
+import com.SimpleBank.BDiA_final_config.Models.User;
 import com.SimpleBank.BDiA_final_config.queries.Queries;
 
 import java.sql.*;
@@ -42,4 +44,53 @@ public class AccountDAO extends BaseDAO{
         }
         return false;
     }
-}
+
+    public double getAmmount(Long accountID) throws SQLException {
+        double ammount = 0.0d;
+        try(Connection connection = getConnection()) {
+            PreparedStatement ammountGet = connection.prepareStatement(Queries.selectAmmount);
+            connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+            ammountGet.setLong(1, accountID);
+            ResultSet rs = ammountGet.executeQuery();
+            while (rs.next()){
+                ammount = rs.getDouble("ammount");
+            }
+            connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+        }
+        return ammount;
+    }
+
+    public void addAmmount(User user,Double ammountToAdd) {
+       // Operation operation = new Operation();
+        OperationDAO operationDAO = new OperationDAO();
+        try(Connection connection = getConnection()){
+            connection.setAutoCommit(false);
+            connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+            Savepoint savepoint = connection.setSavepoint();
+            try(PreparedStatement ammountADD = connection.prepareStatement(Queries.addAmmount);
+                PreparedStatement operationADD = connection.prepareStatement(Queries.logOperation)
+                ){
+                ammountADD.setDouble(1, ammountToAdd);
+                ammountADD.setLong(2,user.getAccountID());
+                     //todo  operationDAO.logOperation(user,);
+                ammountADD.executeUpdate();
+                connection.commit();
+
+            }catch (SQLException e){
+                e.printStackTrace();
+               if(connection!=null){
+                   try {
+                       connection.rollback(savepoint);
+                   }catch (Exception ex){
+                       ex.printStackTrace();
+                   }
+               }
+            }
+            connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+            connection.setAutoCommit(true);
+            } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    }
+

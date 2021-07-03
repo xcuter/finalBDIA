@@ -25,6 +25,6 @@ public class testServlet extends HttpServlet {
         String param = request.getParameter("ammount");
         PrintWriter writer = response.getWriter();
         writer.println(param);
-        response.sendRedirect(request.getContextPath()+"/protectedUserContext");
+        response.sendRedirect(request.getContextPath() + "/protectedUserContext");
     }
 }

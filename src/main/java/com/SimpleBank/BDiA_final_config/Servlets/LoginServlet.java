@@ -18,7 +18,7 @@ import java.io.IOException;
                 @HttpMethodConstraint(value = "GET", rolesAllowed = {"USER"})
         }
 )
-public class LoginServlet extends HttpServlet {
+public class  LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.sendRedirect(request.getContextPath()+"/protectedUserContext");

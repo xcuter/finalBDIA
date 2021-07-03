@@ -10,14 +10,25 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title> Hello ${user}</title>
+    <title> Hello ${FullName}</title>
 </head>
 <body>
         <div>
-            <h1>hellow ${user}</h1>
-            <form action="${pageContext.request.contextPath}/test" action="#">
+            <h1>hello ${FullName}</h1>
+            <h2>Twój stan konta : ${ammount}</h2>
+            <form action="${pageContext.request.contextPath}/addAmmount">
                 <input name="ammount" type="text" placeholder="Kwota" required autofocus>
+                <button type="submit">Wpłać</button>
+            </form>
+            <h1>Przelew standardowy</h1>
+            <form action="${pageContext.request.contextPath}/transferAmmount">
+                <input name="toAccount" type="text" placeholder="numer Konta do przelewu">
+                <input name="ammount" type="text" placeholder="Kwota którą chcesz przelać">
                 <button type="submit">Przelej</button>
+            </form>
+            <h1>Wypłata</h1>
+            <form action="${pageContext.request.contextPath}/substractAmmount">
+                <input name="ammount" type="text">
             </form>
 
 

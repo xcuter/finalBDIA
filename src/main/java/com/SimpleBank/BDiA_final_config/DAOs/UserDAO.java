@@ -37,21 +37,21 @@ public class UserDAO extends BaseDAO {
             }
         }
 
-        public void updateAmmount(String email) throws SQLException {
-            getUserInfo(email);
-        }
-
-        public void getUserInfo(String email) throws SQLException {
-            User user;
+        public User getUserInfo(String email) throws SQLException {
+            User user = new User();
             try (Connection connection = getConnection()) {
                 PreparedStatement userSelect = connection.prepareStatement(Queries.selectUser);
                 userSelect.setString(1, email);
-                userSelect.execute();
-                ResultSet set = userSelect.getResultSet();
+                ResultSet set = userSelect.executeQuery();
                 while (set.next()){
-                    System.out.println(set);
+                    user.setAccountID(set.getLong("account"));
+                    user.setFirstName(set.getString("firstn"));
+                    user.setLastName(set.getString("lastn"));
+                    user.setEmail(email);
                 }
+                System.out.println();
             }
+            return user;
         }
     }
 
